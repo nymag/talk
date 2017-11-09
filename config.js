@@ -182,7 +182,7 @@ const CONFIG = {
 // CONFIG VALIDATION
 //==============================================================================
 
-if (process.env.NODE_ENV === 'test') {
+if (process.env.NODE_ENV === 'test' || process.env.WEBPACK === 'TRUE') {
   if (!CONFIG.ROOT_URL) {
     CONFIG.ROOT_URL = 'http://localhost:3001';
   }
@@ -200,7 +200,7 @@ if (process.env.NODE_ENV === 'test') {
 if (CONFIG.JWT_SECRETS) {
   CONFIG.JWT_SECRETS = JSON.parse(CONFIG.JWT_SECRETS);
 } else if (!CONFIG.JWT_SECRET) {
-  if (process.env.NODE_ENV === 'test') {
+  if (process.env.NODE_ENV === 'test' || process.env.WEBPACK === 'TRUE') {
     if (!CONFIG.JWT_ALG.startsWith('HS')) {
       throw new Error('Providing a asymmetric signing/verfying algorithm without a corresponding secret is not permitted');
     }
