@@ -397,6 +397,10 @@ The username of the SMTP provider you are using.
 
 ## TALK_STATIC_URI
 
+This is a **Build Variable** and must be consumed during build. If using the
+[Docker-onbuild]({{ "/installation-from-docker/#onbuild" | relative_url }})
+image you can specify it with `--build-arg TALK_STATIC_URI=...`.
+
 Used to set the uri where the static assets should be served from. This is used
 when you want to upload the static assets through your build process to a
 service like Google Cloud Storage or Amazon S3 and you would then specify the
