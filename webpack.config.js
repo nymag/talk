@@ -15,6 +15,9 @@ require('dotenv').config();
 const {plugins, pluginsPath, PluginManager} = require('./plugins');
 const manager = new PluginManager(plugins);
 const targetPlugins = manager.section('targets').plugins;
+const {
+  STATIC_URL
+} = require('./url');
 
 debug(`Using ${pluginsPath} as the plugin configuration path`);
 
@@ -36,7 +39,7 @@ const config = {
   target: 'web',
   output: {
     path: path.join(__dirname, 'dist'),
-    publicPath: '/client/',
+    publicPath: `${STATIC_URL}client/`,
     filename: '[name].js'
   },
   module: {
