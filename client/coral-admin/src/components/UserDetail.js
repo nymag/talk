@@ -13,6 +13,8 @@ import {getReliability} from 'coral-framework/utils/user';
 import ButtonCopyToClipboard from './ButtonCopyToClipboard';
 import ClickOutside from 'coral-framework/components/ClickOutside';
 import {Icon, Drawer, Spinner, TabBar, Tab, TabContent, TabPane} from 'coral-ui';
+import ActionsMenu from 'coral-admin/src/components/ActionsMenu';
+import ActionsMenuItem from 'coral-admin/src/components/ActionsMenuItem';
 
 class UserDetail extends React.Component {
 
@@ -64,6 +66,23 @@ class UserDetail extends React.Component {
     this.props.changeStatus(tab);
   }
 
+  showSuspendUserDialog = () => {
+    const {comment, showSuspendUserDialog} = this.props;
+    return showSuspendUserDialog({
+      userId: comment.user.id,
+      username: comment.user.username,
+    });
+  };
+
+  showBanUserDialog = () => {
+    const {root: {user}, showBanUserDialog} = this.props;
+    const {comment, showBanUserDialog} = this.props;
+    return showBanUserDialog({
+      userId: user.id,
+      username: user.username,
+    });
+  };
+
   render() {
 
     if (this.props.loading) {
@@ -106,6 +125,20 @@ class UserDetail extends React.Component {
       <ClickOutside onClickOutside={hideUserDetail}>
         <Drawer onClose={hideUserDetail}>
           <h3>{user.username}</h3>
+
+          {console.log(user)}
+
+          <ActionsMenu icon="not_interested" className="talk-admin-user-detail-actions-menu">
+            <ActionsMenuItem
+              disabled={user.state.status.suspension.status}
+              onClick={this.showSuspendUserDialog}>
+              Suspend User</ActionsMenuItem>
+            <ActionsMenuItem
+              disabled={user.state.status.banned.status}
+              onClick={this.showBanUserDialog}>
+              Ban User
+            </ActionsMenuItem>
+          </ActionsMenu>
 
           <div>
             <ul className={styles.userDetailList}>
