@@ -152,4 +152,10 @@ This means that locally Talk will not work on all domains at once; you must chan
 
 It also means that on production we have **synthetic responses** to "pretend" that `TALK_ROOT_URL` reflects the requested domain. [Here's an example](http://www.grubstreet.com/coral-talk/embed/stream?asset_url=http%3A%2F%2Fwww.grubstreet.com%2F_pages%2Fcjhaiwrmz00p25hyetvxrstxd%40published.html&initialWidth=612&childId=_0.4370014933228332&parentTitle=NYC%20Shames%20Lawyer%20Who%20Threatened%20to%20Call%20ICE%20on%20Employee&parentUrl=http%3A%2F%2Fwww.grubstreet.com%2F2018%2F05%2Fnyc-shames-lawyer-who-threatened-to-call-ice-on-employee.html%23comments). View source and note that the `href` of the `base` element is a grubstreet URL. This is normally the `TALK_ROOT_URL` but we have spoofed it. Ops manages the synthetic responses.
 
+# Styling
 
+Talk allows you to specify an external CSS sheet for styling the comment stream. To edit that reference, log into the Talk admin and go to `Configure` and then `Tech Settings`.
+
+For developer ease, we just include the comment stream styles inside the default styleguide for the `coral-talk` component and on prod set this property to https://cache.nymag.com/media/css/coral-talk._default.css.
+
+Note that the styles there also apply to any NyMag page with the `coral-talk` component on it, so be sure to preface comment stream selectors with `.talk-embed-stream`.
